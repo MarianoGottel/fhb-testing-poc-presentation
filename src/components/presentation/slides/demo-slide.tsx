@@ -160,10 +160,10 @@ export function DemoSlide() {
             className="rounded-lg border border-[#66B2FF] bg-black/40 p-4"
           >
             <div className="mb-3 flex flex-col">
-              <h3 className="text-xl font-semibold text-white">AI-Powered</h3>
+              <h3 className="text-xl font-semibold text-white">AI-Assisted</h3>
               <div className="mt-1 flex items-center space-x-2 text-yellow-400">
                 <Timer className="h-4 w-4" />
-                <span className="text-sm font-mono">~2 minutes</span>
+                <span className="text-sm font-mono">~5 minutes</span>
               </div>
             </div>
 

@@ -104,12 +104,12 @@ export function EvolutionSlide() {
           className="relative"
         >
           <div
-            className="rounded-2xl border-2 p-8"
+            className="relative rounded-2xl border-2 p-8"
             style={{ borderColor: podStages[currentStage].color }}
           >
             {/* Version badge */}
             <div
-              className="absolute -top-4 left-8 rounded-full px-4 py-1 text-sm font-bold"
+              className="absolute -top-4 left-8 z-10 rounded-full px-4 py-1 text-sm font-bold"
               style={{
                 backgroundColor: podStages[currentStage].color,
                 color: '#0A0A0A',
@@ -124,7 +124,7 @@ export function EvolutionSlide() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="absolute -top-4 right-8 rounded-full bg-[#4ECDC4]/20 border border-[#4ECDC4] px-4 py-1"
+                className="absolute -top-4 right-8 z-10 rounded-full bg-[#0A0A0A] border border-[#4ECDC4] px-4 py-1"
               >
                 <span className="text-sm font-medium text-[#4ECDC4]">Unified Team • No rigid roles</span>
               </motion.div>

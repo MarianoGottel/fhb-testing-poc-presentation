@@ -53,7 +53,7 @@ export function PhoenixSlide() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + index * 0.2, duration: 0.6 }}
-                className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10"
+                className="group relative overflow-hidden rounded-xl bg-black/40 p-6 border border-white/10"
               >
                 {/* Icon */}
                 <div 
@@ -70,15 +70,12 @@ export function PhoenixSlide() {
                 {/* Examples */}
                 <div className="space-y-1">
                   {step.examples.map((example, i) => (
-                    <motion.p
+                    <p
                       key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 + index * 0.2 + i * 0.1 }}
                       className="text-sm text-white/50"
                     >
                       • {example}
-                    </motion.p>
+                    </p>
                   ))}
                 </div>
 
@@ -99,7 +96,7 @@ export function PhoenixSlide() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="rounded-xl bg-gradient-to-r from-[#66B2FF]/20 to-[#4ECDC4]/20 p-8 text-center backdrop-blur-sm"
+          className="rounded-xl bg-gradient-to-r from-[#66B2FF]/10 to-[#4ECDC4]/10 p-8 text-center border border-white/10"
         >
           <div className="mb-6 flex justify-center">
             <Users className="h-12 w-12 text-[#66B2FF]" />

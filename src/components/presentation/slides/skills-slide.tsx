@@ -50,7 +50,7 @@ export function SkillsSlide() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-12 text-center"
         >
           <h2 className="text-5xl font-bold text-white">Skills for the Future</h2>
@@ -66,25 +66,31 @@ export function SkillsSlide() {
                 key={skill.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.15, duration: 0.6 }}
-                className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20"
+                transition={{ 
+                  delay: 0.2 + index * 0.1, 
+                  duration: 0.8,
+                  ease: "easeOut"
+                }}
+                whileHover={{ scale: 1.02 }}
+                className="relative overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6"
               >
-                <div 
-                  className="mb-4 inline-flex rounded-lg p-3"
-                  style={{ backgroundColor: `${skill.color}15` }}
+                <motion.div 
+                  className="mb-4 inline-flex rounded-lg p-3 bg-white/5"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <Icon className="h-7 w-7" style={{ color: skill.color }} />
-                </div>
+                </motion.div>
 
                 <h3 className="mb-2 text-xl font-semibold text-white">{skill.title}</h3>
                 <p className="mb-3 text-white/70">{skill.description}</p>
                 <p className="text-sm text-white/50 italic">{skill.insight}</p>
 
-                {/* Hover gradient */}
+                {/* Static gradient overlay */}
                 <div 
-                  className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-5"
+                  className="pointer-events-none absolute inset-0 opacity-10"
                   style={{
-                    background: `radial-gradient(circle at top left, ${skill.color} 0%, transparent 60%)`
+                    background: `linear-gradient(135deg, ${skill.color}20 0%, transparent 50%)`
                   }}
                 />
               </motion.div>
@@ -101,25 +107,31 @@ export function SkillsSlide() {
                 key={skill.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.65 + index * 0.15, duration: 0.6 }}
-                className="group relative w-full max-w-sm overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20"
+                transition={{ 
+                  delay: 0.5 + index * 0.1, 
+                  duration: 0.8,
+                  ease: "easeOut"
+                }}
+                whileHover={{ scale: 1.02 }}
+                className="relative w-full max-w-sm overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6"
               >
-                <div 
-                  className="mb-4 inline-flex rounded-lg p-3"
-                  style={{ backgroundColor: `${skill.color}15` }}
+                <motion.div 
+                  className="mb-4 inline-flex rounded-lg p-3 bg-white/5"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <Icon className="h-7 w-7" style={{ color: skill.color }} />
-                </div>
+                </motion.div>
 
                 <h3 className="mb-2 text-xl font-semibold text-white">{skill.title}</h3>
                 <p className="mb-3 text-white/70">{skill.description}</p>
                 <p className="text-sm text-white/50 italic">{skill.insight}</p>
 
-                {/* Hover gradient */}
+                {/* Static gradient overlay */}
                 <div 
-                  className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-5"
+                  className="pointer-events-none absolute inset-0 opacity-10"
                   style={{
-                    background: `radial-gradient(circle at top left, ${skill.color} 0%, transparent 60%)`
+                    background: `linear-gradient(135deg, ${skill.color}20 0%, transparent 50%)`
                   }}
                 />
               </motion.div>
@@ -129,9 +141,9 @@ export function SkillsSlide() {
 
         {/* Central Message */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1, ease: "easeOut" }}
           className="mt-12 text-center"
         >
           <p className="text-2xl font-light text-white">

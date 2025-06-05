@@ -10,6 +10,7 @@ export function PollSlide() {
     'Concerned about job security',
     'Pride in my craft',
     'All of the above',
+    'None of the above',
   ]
 
   return (

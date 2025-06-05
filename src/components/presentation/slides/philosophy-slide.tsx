@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { SlideContainer } from '../slide-container'
 
 const taoQuote = [
-  "The Builder stays behind,",
+  "The Creator stays behind,",
   "that is why he's ahead.",
   "He is detached,",
   "thus at one with all.",
