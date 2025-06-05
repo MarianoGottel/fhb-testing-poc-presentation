@@ -58,7 +58,7 @@ def validate_account(account_data: dict) -> tuple[bool, str]:
     
     # SSN format validation
     ssn = account_data.get('ssn', '')
-    if not re.match(r'^\d{3}-\d{2}-\d{4}$', ssn):
+    if not re.match(r'^\\d{3}-\\d{2}-\\d{4}$', ssn):
         return False, "SSN must be in format XXX-XX-XXXX"
     
     return True, "Account validation successful"`
@@ -75,6 +75,7 @@ export function DemoSlide() {
         setTypedCode(traditionalCode.substring(0, traditionalProgress + 1))
         setTraditionalProgress(traditionalProgress + 1)
       }, 50) // Typing speed
+
       return () => clearTimeout(timer)
     }
   }, [showTraditional, traditionalProgress])

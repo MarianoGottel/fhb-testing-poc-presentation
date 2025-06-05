@@ -31,7 +31,7 @@ const podStages: PodStage[] = [
   },
   {
     version: '2.0',
-    title: 'AI-Enhanced Pod',
+    title: 'AI-Enhanced Pod (Current)',
     roles: [
       { title: 'Lead Engineer', description: 'Orchestrator & Visionary' },
       { title: 'Engineers', description: 'AI Directors & Quality Guardians' },
@@ -42,11 +42,11 @@ const podStages: PodStage[] = [
   },
   {
     version: '3.0',
-    title: 'Builder Pod',
+    title: 'AI-Native Builder Pod',
     roles: [
       { title: 'Lead Builder', description: 'Systems Thinker' },
       { title: 'Builders', description: 'Multi-disciplinary Creators' },
-      { title: 'Unified Team', description: 'No rigid roles' },
+      { title: 'AI Agents', description: 'Swarm of executors' },
     ],
     output: 'Entire products in days',
     color: '#4ECDC4',
@@ -54,7 +54,7 @@ const podStages: PodStage[] = [
 ]
 
 export function EvolutionSlide() {
-  const [currentStage, setCurrentStage] = useState(0)
+  const [currentStage, setCurrentStage] = useState(0) // Start at traditional stage (1.0)
 
   return (
     <SlideContainer transition="slide">
@@ -65,7 +65,7 @@ export function EvolutionSlide() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Pod Evolution
+          Aurora Pod Evolution
         </motion.h2>
 
         {/* Progress indicators */}
@@ -117,6 +117,18 @@ export function EvolutionSlide() {
             >
               Pod {podStages[currentStage].version}
             </div>
+
+            {/* Unified Team badge for AI-Native Builder Pod */}
+            {currentStage === 2 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="absolute -top-4 right-8 rounded-full bg-[#4ECDC4]/20 border border-[#4ECDC4] px-4 py-1"
+              >
+                <span className="text-sm font-medium text-[#4ECDC4]">Unified Team • No rigid roles</span>
+              </motion.div>
+            )}
 
             {/* Roles */}
             <div className="mb-8 space-y-4">
@@ -180,9 +192,52 @@ export function EvolutionSlide() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="mt-12 text-center text-white/60"
+          className="mt-12"
         >
-          <p>Current → Next 3 months → Next 6 months</p>
+          <div className="relative mx-auto max-w-4xl">
+            <div className="absolute inset-x-0 top-2 h-1 bg-gradient-to-r from-gray-700 via-[#66B2FF] to-[#4ECDC4]" />
+            
+            <div className="relative flex justify-between">
+              {/* Past */}
+              <div className="flex flex-col items-center">
+                <div className="h-4 w-4 rounded-full bg-gray-700" style={{ marginTop: '1px' }} />
+                <p className="mt-2 text-sm font-medium text-gray-500">Past</p>
+                <p className="text-xs text-gray-600">Traditional</p>
+              </div>
+              
+              {/* Current */}
+              <div className="flex flex-col items-center">
+                <motion.div
+                  className="h-6 w-6 rounded-full bg-[#66B2FF]"
+                  style={{ marginTop: '-1px' }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <p className="mt-2 text-sm font-bold text-[#66B2FF]">Today</p>
+                <p className="text-xs text-[#66B2FF]/80">AI-Enhanced</p>
+              </div>
+              
+              {/* 3 Months */}
+              <div className="flex flex-col items-center">
+                <div className="h-4 w-4 rounded-full bg-[#4ECDC4]" style={{ marginTop: '1px' }} />
+                <p className="mt-2 text-sm font-medium text-white/60">3 Months</p>
+                <p className="text-xs text-white/40">Transition</p>
+              </div>
+              
+              {/* 6 Months */}
+              <div className="flex flex-col items-center">
+                <div className="h-4 w-4 rounded-full bg-[#4ECDC4]" style={{ marginTop: '1px' }} />
+                <p className="mt-2 text-sm font-medium text-[#4ECDC4]">6 Months</p>
+                <p className="text-xs text-[#4ECDC4]/80">Builders</p>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </SlideContainer>

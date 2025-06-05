@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { SlideContainer } from '../slide-container'
 
 const taoQuote = [
-  "The Vibe Coder stays behind,",
-  "that is why he's ahead.",
-  "He is detached,",
+  "The Builder stays behind,",
+  "that is why she's ahead.",
+  "She is detached,",
   "thus at one with all.",
   "Through selfless action",
-  "he is perfectly fulfilled."
+  "she is perfectly fulfilled."
 ]
 
 export function PhilosophySlide() {

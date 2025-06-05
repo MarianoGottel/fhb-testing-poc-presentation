@@ -20,43 +20,52 @@ export function OpeningSlide() {
           }}
         />
 
-        {/* Title */}
+        {/* Main Title */}
         <motion.h1
-          className="mb-8 text-6xl font-bold text-white md:text-7xl lg:text-8xl"
+          className="mb-12 text-5xl font-bold text-transparent md:text-6xl lg:text-7xl xl:text-8xl"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #66B2FF, #4ECDC4)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          Project Aurora
+          From Engineers to Builders
         </motion.h1>
 
-        <motion.h2
-          className="mb-12 text-3xl font-light text-[#66B2FF] md:text-4xl"
+        <motion.p
+          className="mb-2 text-xl text-white/80 md:text-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          Engineering All Hands
-        </motion.h2>
+          Embracing the Age of AI
+        </motion.p>
+
+        <motion.div
+          className="mt-16 mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-light text-white md:text-4xl">
+            Project Aurora
+          </h2>
+          <p className="mt-2 text-2xl text-[#66B2FF] md:text-3xl">
+            Engineering All Hands
+          </p>
+        </motion.div>
 
         {/* Date */}
         <motion.p
           className="text-xl text-white/60 md:text-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          June 5th, 2025
-        </motion.p>
-
-        {/* Subtitle */}
-        <motion.p
-          className="mt-8 text-lg text-white/80 md:text-xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          From Engineers to Builders: Embracing the Age of AI
+          June 5th, 2025
         </motion.p>
       </div>
     </SlideContainer>

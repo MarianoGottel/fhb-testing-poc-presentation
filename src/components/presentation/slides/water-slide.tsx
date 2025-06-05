@@ -2,20 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { SlideContainer } from '../slide-container'
-import { useEffect, useState } from 'react'
 
 export function WaterSlide() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   const quotes = [
     "Code is like water.",
     "It flows, it changes, it adapts.",
@@ -27,82 +15,89 @@ export function WaterSlide() {
 
   return (
     <SlideContainer transition="custom" className="relative overflow-hidden">
-      {/* Water effect background */}
-      <div className="absolute inset-0">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+      {/* Animated water background */}
+      <div className="absolute inset-0 opacity-20">
+        <svg
+          className="h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 560"
+        >
           <defs>
-            <filter id="water">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.02"
-                numOctaves="3"
-                result="turbulence"
-              />
-              <feColorMatrix in="turbulence" type="saturate" values="2" />
-            </filter>
+            <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#66B2FF" stopOpacity="0.6" />
+              <stop offset="50%" stopColor="#4ECDC4" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#66B2FF" stopOpacity="0.6" />
+            </linearGradient>
           </defs>
-          <motion.rect
-            width="100%"
-            height="100%"
-            filter="url(#water)"
-            opacity="0.1"
-            fill="#66B2FF"
+          
+          {/* Multiple wave layers for depth */}
+          <motion.path
+            d="M0,160 C320,300,420,240,560,200 C700,160,780,240,960,260 C1140,280,1320,200,1440,160 L1440,560 L0,560 Z"
+            fill="url(#waterGradient)"
+            initial={{ d: "M0,160 C320,300,420,240,560,200 C700,160,780,240,960,260 C1140,280,1320,200,1440,160 L1440,560 L0,560 Z" }}
             animate={{
-              x: mousePosition.x * 0.01,
-              y: mousePosition.y * 0.01,
+              d: [
+                "M0,160 C320,300,420,240,560,200 C700,160,780,240,960,260 C1140,280,1320,200,1440,160 L1440,560 L0,560 Z",
+                "M0,200 C320,160,420,280,560,240 C700,200,780,160,960,200 C1140,240,1320,180,1440,200 L1440,560 L0,560 Z",
+                "M0,240 C320,200,420,160,560,180 C700,200,780,280,960,240 C1140,200,1320,240,1440,240 L1440,560 L0,560 Z",
+                "M0,160 C320,300,420,240,560,200 C700,160,780,240,960,260 C1140,280,1320,200,1440,160 L1440,560 L0,560 Z",
+              ],
             }}
-            transition={{ type: 'spring', damping: 30 }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          
+          <motion.path
+            d="M0,240 C320,200,420,160,560,180 C700,200,780,280,960,240 C1140,200,1320,240,1440,240 L1440,560 L0,560 Z"
+            fill="url(#waterGradient)"
+            opacity="0.5"
+            initial={{ d: "M0,240 C320,200,420,160,560,180 C700,200,780,280,960,240 C1140,200,1320,240,1440,240 L1440,560 L0,560 Z" }}
+            animate={{
+              d: [
+                "M0,240 C320,200,420,160,560,180 C700,200,780,280,960,240 C1140,200,1320,240,1440,240 L1440,560 L0,560 Z",
+                "M0,200 C320,240,420,200,560,160 C700,120,780,200,960,180 C1140,160,1320,200,1440,200 L1440,560 L0,560 Z",
+                "M0,160 C320,120,420,240,560,200 C700,160,780,120,960,160 C1140,200,1320,160,1440,160 L1440,560 L0,560 Z",
+                "M0,240 C320,200,420,160,560,180 C700,200,780,280,960,240 C1140,200,1320,240,1440,240 L1440,560 L0,560 Z",
+              ],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
           />
         </svg>
       </div>
 
-      {/* Water symbols */}
-      <motion.div
-        className="absolute left-1/4 top-1/4 text-6xl"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      >
-        💧
-      </motion.div>
-
-      <motion.div
-        className="absolute right-1/4 top-1/3 text-8xl"
-        animate={{
-          y: [0, -30, 0],
-          opacity: [0.2, 0.5, 0.2],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 1,
-        }}
-      >
-        🌊
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-1/4 left-1/3 text-7xl"
-        animate={{
-          y: [0, -25, 0],
-          opacity: [0.25, 0.55, 0.25],
-        }}
-        transition={{
-          duration: 4.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2,
-        }}
-      >
-        🏞️
-      </motion.div>
+      {/* Flowing particles */}
+      <div className="absolute inset-0">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-1 w-1 rounded-full bg-[#66B2FF]"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, 100, -50, 0],
+              y: [0, -30, 60, 0],
+              opacity: [0, 0.8, 0.8, 0],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 10,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
 
       {/* Quotes */}
       <div className="relative z-10 max-w-4xl space-y-8 text-center">
@@ -118,7 +113,7 @@ export function WaterSlide() {
               ease: 'easeOut',
             }}
             style={{
-              textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+              textShadow: '0 2px 20px rgba(0, 0, 0, 0.8)',
             }}
           >
             {quote}
@@ -134,7 +129,7 @@ export function WaterSlide() {
         transition={{ delay: 5, duration: 1 }}
       >
         <p className="text-xl text-white/80">
-          Code should be flowing just like water
+          Let your code flow like water
         </p>
       </motion.div>
     </SlideContainer>

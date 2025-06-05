@@ -68,11 +68,12 @@ export const useKeyboardNavigation = () => {
         case '6':
         case '7':
         case '8':
-        case '9':
+        case '9': {
           event.preventDefault()
           const slideNumber = parseInt(event.key) - 1
           goToSlide(slideNumber)
           break
+        }
         case '0':
           event.preventDefault()
           goToSlide(0)
@@ -81,6 +82,7 @@ export const useKeyboardNavigation = () => {
     }
 
     window.addEventListener('keydown', handleKeyPress)
+
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [nextSlide, previousSlide, goToSlide, toggleFullscreen, togglePresenterMode])
 

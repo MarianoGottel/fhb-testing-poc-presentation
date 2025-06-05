@@ -41,7 +41,7 @@ export const SLIDES: SlideMetadata[] = [
   },
   {
     id: 'evolution',
-    title: 'Pod Evolution',
+    title: 'Aurora Pod Evolution',
     subtitle: 'The Transformation Journey',
     duration: 90,
     type: 'interactive',

@@ -81,12 +81,14 @@ export default function PresenterPage() {
     const timer = setInterval(() => {
       setElapsedTime(Math.floor((Date.now() - startTime) / 1000))
     }, 1000)
+
     return () => clearInterval(timer)
   }, [startTime])
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
+
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
