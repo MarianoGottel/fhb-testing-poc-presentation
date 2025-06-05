@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { CursorLayout } from '@/components/presentation/CursorLayout'
 
 export const metadata: Metadata = {
   title: 'Project Aurora Engineering All Hands - June 5, 2025',
@@ -11,8 +12,10 @@ export default function PresentationLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="presentation-layout">
-      {children}
-    </div>
+    <CursorLayout>
+      <div className="presentation-layout">
+        {children}
+      </div>
+    </CursorLayout>
   )
 }
