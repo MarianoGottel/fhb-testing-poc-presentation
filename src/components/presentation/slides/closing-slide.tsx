@@ -12,25 +12,25 @@ export function ClosingSlide() {
           {/* Engineer side */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 0.3, x: 0 }}
+            animate={{ opacity: 0.85, x: 0 }}
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="rounded-lg border border-gray-700 bg-black/40 p-8">
-              <h3 className="mb-4 text-2xl text-gray-500">Engineer</h3>
+            <div className="rounded-lg border border-gray-500 bg-gray-800/80 p-8">
+              <h3 className="mb-4 text-2xl text-gray-300">Engineer</h3>
               <div className="h-32 w-32">
-                <svg viewBox="0 0 100 100" className="opacity-50">
+                <svg viewBox="0 0 100 100" className="opacity-80">
                   <rect x="20" y="20" width="60" height="10" fill="#6C757D" />
                   <rect x="20" y="40" width="50" height="10" fill="#6C757D" />
                   <rect x="20" y="60" width="55" height="10" fill="#6C757D" />
                 </svg>
               </div>
-              <p className="mt-4 text-sm text-gray-600">Writing code alone</p>
+              <p className="mt-4 text-sm text-gray-400">Writing code alone</p>
             </div>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
+              className="absolute inset-0 rounded-lg bg-gradient-to-t from-black/40 to-transparent"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 0.3 }}
               transition={{ delay: 1, duration: 1 }}
             />
           </motion.div>
@@ -123,17 +123,18 @@ export function ClosingSlide() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 4, duration: 1 }}
-          className="mt-16"
+          className="mt-16 pb-8"
         >
           <h2 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
             The only question is:
           </h2>
           <motion.h1
-            className="mt-4 text-6xl font-bold text-transparent md:text-7xl lg:text-8xl"
+            className="mt-4 pb-2 text-6xl font-bold text-transparent md:text-7xl lg:text-8xl"
             style={{
               backgroundImage: 'linear-gradient(to right, #66B2FF, #4ECDC4)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
+              lineHeight: '1.2',
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

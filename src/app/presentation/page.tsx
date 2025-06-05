@@ -17,6 +17,7 @@ import {
   PhilosophySlide,
   PhoenixSlide,
   ClosingSlide,
+  SkillsSlide,
 } from '@/components/presentation/slides'
 
 const slideComponents = [
@@ -29,6 +30,7 @@ const slideComponents = [
   PhilosophySlide,
   PhoenixSlide,
   ClosingSlide,
+  SkillsSlide,
 ]
 
 export default function PresentationPage() {

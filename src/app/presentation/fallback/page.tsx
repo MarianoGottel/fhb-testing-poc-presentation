@@ -146,6 +146,46 @@ export default function FallbackPage() {
               Will you?
             </h1>
           </section>
+
+          {/* Slide 10: Skills for the Future */}
+          <section>
+            <h2 className="mb-8 text-4xl font-bold">Skills for the Future</h2>
+            <p className="mb-8 text-xl text-white/80">What will set you apart in the age of AI</p>
+            
+            <div className="space-y-6">
+              <div className="rounded-lg border border-[#66B2FF]/30 bg-[#66B2FF]/10 p-6">
+                <h3 className="mb-2 text-2xl font-bold text-[#66B2FF]">Develop Your Opinion</h3>
+                <p className="text-white/70">Be authentic. Decide what you stand for.</p>
+                <p className="mt-2 text-sm italic text-white/50">In the age of AI, it's easy to lose yourself. Your unique perspective is your strength.</p>
+              </div>
+
+              <div className="rounded-lg border border-[#4ECDC4]/30 bg-[#4ECDC4]/10 p-6">
+                <h3 className="mb-2 text-2xl font-bold text-[#4ECDC4]">Cultivate Curiosity</h3>
+                <p className="text-white/70">Explore how the world is changing.</p>
+                <p className="mt-2 text-sm italic text-white/50">Stay curious about new capabilities and possibilities that emerge every day.</p>
+              </div>
+
+              <div className="rounded-lg border border-[#FFB366]/30 bg-[#FFB366]/10 p-6">
+                <h3 className="mb-2 text-2xl font-bold text-[#FFB366]">High Sense of Agency</h3>
+                <p className="text-white/70">Take ownership and make things happen.</p>
+                <p className="mt-2 text-sm italic text-white/50">Don't wait for permission. See opportunities and act on them.</p>
+              </div>
+
+              <div className="rounded-lg border border-[#FF6B6B]/30 bg-[#FF6B6B]/10 p-6">
+                <h3 className="mb-2 text-2xl font-bold text-[#FF6B6B]">Master the Art of Questions</h3>
+                <p className="text-white/70">With all answers available, questions become crucial.</p>
+                <p className="mt-2 text-sm italic text-white/50">The quality of your questions determines the value of AI's answers.</p>
+              </div>
+
+              <div className="rounded-lg border border-[#B366FF]/30 bg-[#B366FF]/10 p-6">
+                <h3 className="mb-2 text-2xl font-bold text-[#B366FF]">Embrace Discomfort</h3>
+                <p className="text-white/70">Step outside your comfort zone regularly.</p>
+                <p className="mt-2 text-sm italic text-white/50">Growth happens at the edge of comfort. Make discomfort your teacher.</p>
+              </div>
+            </div>
+
+            <p className="mt-8 text-xl font-light">These aren't just skills—they're your <span className="font-bold text-[#66B2FF]">compass</span> for navigating a world where AI handles the execution.</p>
+          </section>
         </div>
       </div>
     </div>

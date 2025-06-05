@@ -15,6 +15,7 @@ import {
   PhilosophySlide,
   PhoenixSlide,
   ClosingSlide,
+  SkillsSlide,
 } from '@/components/presentation/slides'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
@@ -30,6 +31,7 @@ const slideComponents = [
   PhilosophySlide,
   PhoenixSlide,
   ClosingSlide,
+  SkillsSlide,
 ]
 
 const speakerNotes = [
@@ -61,13 +63,17 @@ const speakerNotes = [
   `The Tao teaches us that by letting go, we gain more.
   Your value was never in the code - it was in your vision.`,
   
-  // Phoenix
-  `Project Phoenix is your first step. Small wins build confidence.
-  Pick something that annoys you daily and fix it with AI.`,
+  // What You Can Do
+  `This is about personal reflection. What tasks bog you down?
+  How could AI free you? Share your ideas - we're all learning together.`,
   
   // Closing
   `The choice is yours. But know this: First Horizon will lead this transformation.
   The question is: will you lead with us?`,
+  
+  // Skills
+  `These aren't just nice-to-haves. These are survival skills for the AI age.
+  Develop your opinion. Stay curious. Take ownership. Ask better questions.`,
 ]
 
 export default function PresenterPage() {

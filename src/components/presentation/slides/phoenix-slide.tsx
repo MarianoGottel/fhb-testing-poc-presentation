@@ -2,167 +2,149 @@
 
 import { motion } from 'framer-motion'
 import { SlideContainer } from '../slide-container'
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { usePresentationStore } from '@/lib/presentation/store'
-import { useState, useEffect } from 'react'
-import { Flame } from 'lucide-react'
+import { Brain, Users, Lightbulb, MessageCircle } from 'lucide-react'
 
 export function PhoenixSlide() {
-  const { phoenixSignups, incrementPhoenixSignups } = usePresentationStore()
-  const [hasJoined, setHasJoined] = useState(false)
-  const [displayedSignups, setDisplayedSignups] = useState(phoenixSignups)
-
-  useEffect(() => {
-    setDisplayedSignups(phoenixSignups)
-  }, [phoenixSignups])
-
-  const handleJoin = () => {
-    if (!hasJoined) {
-      incrementPhoenixSignups()
-      setHasJoined(true)
+  const reflectionSteps = [
+    {
+      icon: Brain,
+      title: "Identify Your Repetitive Tasks",
+      description: "What do you do every day that feels mechanical?",
+      examples: ["Code reviews", "Data validation", "Test writing", "Documentation"],
+      color: "#66B2FF"
+    },
+    {
+      icon: Lightbulb,
+      title: "Imagine the Automation",
+      description: "How could AI handle this for you?",
+      examples: ["Automated PR reviews", "Smart validation rules", "AI-generated tests", "Living documentation"],
+      color: "#4ECDC4"
+    },
+    {
+      icon: MessageCircle,
+      title: "What's Stopping You?",
+      description: "Be honest about your barriers",
+      examples: ["Don't know where to start", "Compliance concerns", "Tool overwhelm", "Time to learn"],
+      color: "#FF6B6B"
     }
-  }
-
-  const challenges = [
-    { icon: '🎯', text: 'Pick one tedious task you do repeatedly' },
-    { icon: '🤖', text: 'Use AI to automate or accelerate it' },
-    { icon: '⏱️', text: 'Measure the time saved' },
-    { icon: '🚀', text: "Share your learning at next month's All Hands" },
   ]
 
   return (
-    <SlideContainer transition="scale" className="relative overflow-hidden">
-      {/* Phoenix animation background */}
-      <div className="absolute inset-0">
-        {/* Fire particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bottom-0"
-            style={{
-              left: `${Math.random() * 100}%`,
-            }}
-            initial={{ y: 0, opacity: 0 }}
-            animate={{
-              y: -800,
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: 'easeOut',
-            }}
-          >
-            <Flame className="h-8 w-8 text-[#FF6B6B]" />
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="relative z-10 w-full max-w-4xl">
-        {/* Title with Phoenix */}
+    <SlideContainer transition="scale" className="bg-gradient-to-br from-[#0A0A0A] via-[#0A0A0A] to-[#003366]/20">
+      <div className="w-full max-w-6xl">
+        {/* Title */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="mb-8 text-center"
-        >
-          <motion.div
-            className="mb-4 text-8xl"
-            animate={{
-              y: [0, -10, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            🔥
-          </motion.div>
-          <h2 className="text-5xl font-bold text-white">PROJECT PHOENIX</h2>
-          <p className="mt-2 text-xl text-[#FF6B6B]">Your 30-Day Challenge</p>
-        </motion.div>
-
-        {/* Challenge steps */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mb-8 space-y-4"
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
         >
-          {challenges.map((challenge, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7 + index * 0.1 }}
-              className="flex items-center space-x-4 rounded-lg bg-black/40 p-4 backdrop-blur-sm"
-            >
-              <span className="text-3xl">{challenge.icon}</span>
-              <span className="text-lg text-white">{challenge.text}</span>
-            </motion.div>
-          ))}
+          <h2 className="text-5xl font-bold text-white">What You Can Do</h2>
+          <p className="mt-3 text-2xl text-white/80">Your Personal AI Transformation</p>
         </motion.div>
 
-        {/* Join button and counter */}
+        {/* Reflection Steps */}
+        <div className="mb-12 grid gap-6 md:grid-cols-3">
+          {reflectionSteps.map((step, index) => {
+            const Icon = step.icon
+            return (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.2, duration: 0.6 }}
+                className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10"
+              >
+                {/* Icon */}
+                <div 
+                  className="mb-4 inline-flex rounded-lg p-3"
+                  style={{ backgroundColor: `${step.color}20` }}
+                >
+                  <Icon className="h-8 w-8" style={{ color: step.color }} />
+                </div>
+
+                {/* Content */}
+                <h3 className="mb-2 text-xl font-semibold text-white">{step.title}</h3>
+                <p className="mb-4 text-white/70">{step.description}</p>
+
+                {/* Examples */}
+                <div className="space-y-1">
+                  {step.examples.map((example, i) => (
+                    <motion.p
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 + index * 0.2 + i * 0.1 }}
+                      className="text-sm text-white/50"
+                    >
+                      • {example}
+                    </motion.p>
+                  ))}
+                </div>
+
+                {/* Hover effect gradient */}
+                <div 
+                  className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-10"
+                  style={{
+                    background: `radial-gradient(circle at center, ${step.color} 0%, transparent 70%)`
+                  }}
+                />
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="text-center"
+          transition={{ delay: 1, duration: 0.6 }}
+          className="rounded-xl bg-gradient-to-r from-[#66B2FF]/20 to-[#4ECDC4]/20 p-8 text-center backdrop-blur-sm"
         >
-          <Button
-            onClick={handleJoin}
-            disabled={hasJoined}
-            size="lg"
-            className={`transform transition-all ${
-              hasJoined
-                ? 'bg-green-500 hover:bg-green-600'
-                : 'bg-[#FF6B6B] hover:bg-[#FF6B6B]/80 hover:scale-105'
-            }`}
-          >
-            {hasJoined ? '✓ Joined' : 'Join the Challenge'}
-          </Button>
+          <div className="mb-6 flex justify-center">
+            <Users className="h-12 w-12 text-[#66B2FF]" />
+          </div>
+          
+          <h3 className="mb-4 text-2xl font-semibold text-white">
+            You're Not Alone in This Journey
+          </h3>
+          
+          <p className="mb-6 text-lg text-white/80">
+            Share your automation ideas. Learn from others. Get expert guidance.
+          </p>
 
-          <motion.div
-            className="mt-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-          >
-            <p className="text-lg text-white/60">Builders joined:</p>
-            <motion.p
-              className="text-5xl font-bold text-[#FF6B6B]"
-              key={displayedSignups}
-              initial={{ scale: 1.2, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', damping: 10 }}
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="rounded-full bg-[#66B2FF]/20 px-6 py-3 text-[#66B2FF]"
             >
-              {displayedSignups}
-            </motion.p>
-          </motion.div>
+              📅 Engineering All Hands
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="rounded-full bg-[#4ECDC4]/20 px-6 py-3 text-[#4ECDC4]"
+            >
+              📚 Regular Knowledge Sharing
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="rounded-full bg-white/10 px-6 py-3 text-white"
+            >
+              🤝 Peer Learning Sessions
+            </motion.div>
+          </div>
         </motion.div>
 
-        {/* Resources */}
+        {/* Bottom message */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.6 }}
-          className="mt-12 text-center text-white/80"
+          transition={{ delay: 1.5, duration: 0.6 }}
+          className="mt-8 text-center"
         >
-          <p className="text-lg">Resources launching today:</p>
-          <div className="mt-3 flex flex-wrap justify-center gap-3">
-            <span className="rounded-full bg-white/10 px-4 py-1 text-sm">
-              AI Workflow Masterclass
-            </span>
-            <span className="rounded-full bg-white/10 px-4 py-1 text-sm">
-              #ai-pioneers Slack
-            </span>
-            <span className="rounded-full bg-white/10 px-4 py-1 text-sm">
-              Context Management Guide
-            </span>
-          </div>
+          <p className="text-xl text-white/60">
+            Start small. Think big. Transform everything.
+          </p>
         </motion.div>
       </div>
     </SlideContainer>

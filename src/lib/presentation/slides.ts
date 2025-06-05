@@ -49,8 +49,8 @@ export const SLIDES: SlideMetadata[] = [
   },
   {
     id: 'demo',
-    title: 'Live Demo',
-    subtitle: '2 Hours vs 2 Minutes',
+    title: 'The Evolution of Development',
+    subtitle: 'Traditional → AI-Powered → Agentic',
     duration: 120,
     type: 'content',
     transition: 'slide',
@@ -65,8 +65,8 @@ export const SLIDES: SlideMetadata[] = [
   },
   {
     id: 'phoenix',
-    title: 'Project Phoenix',
-    subtitle: 'Your 30-Day Challenge',
+    title: 'What You Can Do',
+    subtitle: 'Your Personal AI Transformation',
     duration: 90,
     type: 'interactive',
     transition: 'scale',
@@ -76,6 +76,14 @@ export const SLIDES: SlideMetadata[] = [
     title: 'The Choice',
     subtitle: 'Will You?',
     type: 'closing',
+    transition: 'fade',
+  },
+  {
+    id: 'skills',
+    title: 'Skills for the Future',
+    subtitle: 'What will set you apart',
+    duration: 90,
+    type: 'content',
     transition: 'fade',
   },
 ]

@@ -63,11 +63,38 @@ def validate_account(account_data: dict) -> tuple[bool, str]:
     
     return True, "Account validation successful"`
 
+const agenticPrompt = `Build a complete account validation microservice for First Horizon with:
+- REST API endpoints
+- PostgreSQL integration
+- Full test coverage
+- Docker deployment
+- Monitoring and logging
+- Documentation`
+
+const agenticOutput = `🤖 Autonomous Agent Execution Plan:
+
+1. ✓ Analyzing requirements and architecture patterns
+2. ✓ Generating project structure and dependencies
+3. ✓ Creating database schema and migrations
+4. ✓ Implementing validation service with error handling
+5. ✓ Building REST API with OpenAPI documentation
+6. ✓ Writing comprehensive test suite (98% coverage)
+7. ✓ Setting up Docker configuration
+8. ✓ Configuring monitoring with Prometheus
+9. ✓ Generating deployment documentation
+
+📁 Files created: 47
+📊 Test coverage: 98%
+🚀 Ready to deploy
+
+Total execution time: 45 seconds`
+
 export function DemoSlide() {
   const [showTraditional, setShowTraditional] = useState(true)
   const [traditionalProgress, setTraditionalProgress] = useState(0)
   const [aiProgress, setAiProgress] = useState(0)
   const [typedCode, setTypedCode] = useState('')
+  const [currentView, setCurrentView] = useState(0) // 0: traditional, 1: AI, 2: agentic
 
   useEffect(() => {
     if (showTraditional && traditionalProgress < traditionalCode.length) {
@@ -97,91 +124,113 @@ export function DemoSlide() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          The Power of AI-Assisted Development
+          The Evolution of Development
         </motion.h2>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-3 gap-6">
           {/* Traditional Side */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="rounded-lg border border-gray-700 bg-black/40 p-6"
+            className="rounded-lg border border-gray-700 bg-black/40 p-4"
           >
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-2xl font-semibold text-white">Traditional Way</h3>
-              <div className="flex items-center space-x-2 text-red-400">
-                <Timer className="h-5 w-5" />
-                <span className="font-mono">~2 hours</span>
+            <div className="mb-3 flex flex-col">
+              <h3 className="text-xl font-semibold text-white">Traditional</h3>
+              <div className="mt-1 flex items-center space-x-2 text-red-400">
+                <Timer className="h-4 w-4" />
+                <span className="text-sm font-mono">~2 hours</span>
               </div>
             </div>
 
-            <div className="h-[400px] overflow-auto rounded bg-gray-900 p-4">
-              <pre className="text-sm text-gray-300">
-                <code>{showTraditional ? typedCode : traditionalCode}</code>
+            <div className="h-[350px] overflow-auto rounded bg-gray-900 p-3">
+              <pre className="text-xs text-gray-300">
+                <code>{traditionalCode}</code>
               </pre>
             </div>
+            
+            <p className="mt-3 text-sm text-gray-400">Manual coding, testing, documentation</p>
           </motion.div>
 
-          {/* AI Side */}
+          {/* AI-Powered Side */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-lg border border-[#66B2FF] bg-black/40 p-4"
+          >
+            <div className="mb-3 flex flex-col">
+              <h3 className="text-xl font-semibold text-white">AI-Powered</h3>
+              <div className="mt-1 flex items-center space-x-2 text-yellow-400">
+                <Timer className="h-4 w-4" />
+                <span className="text-sm font-mono">~2 minutes</span>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {/* Prompt */}
+              <div className="rounded bg-gray-800 p-2">
+                <p className="text-xs font-mono text-[#66B2FF]">Prompt:</p>
+                <p className="mt-1 text-xs text-gray-300">{aiPrompt}</p>
+              </div>
+
+              {/* Generated Code */}
+              <div className="h-[270px] overflow-auto rounded bg-gray-900 p-3">
+                <pre className="text-xs text-gray-300">
+                  <code>{aiGeneratedCode}</code>
+                </pre>
+              </div>
+            </div>
+            
+            <p className="mt-3 text-sm text-[#66B2FF]">Complete code with error handling</p>
+          </motion.div>
+
+          {/* Agentic Future */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="rounded-lg border border-[#66B2FF] bg-black/40 p-6"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="rounded-lg border border-[#4ECDC4] bg-black/40 p-4"
           >
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-2xl font-semibold text-white">AI-Powered</h3>
-              <div className="flex items-center space-x-2 text-green-400">
-                <Timer className="h-5 w-5" />
-                <span className="font-mono">~2 minutes</span>
+            <div className="mb-3 flex flex-col">
+              <h3 className="text-xl font-semibold text-white">Agentic Future</h3>
+              <div className="mt-1 flex items-center space-x-2 text-green-400">
+                <Timer className="h-4 w-4" />
+                <span className="text-sm font-mono">~45 seconds</span>
               </div>
             </div>
 
-            {showTraditional ? (
-              <div className="flex h-[400px] flex-col items-center justify-center">
-                <motion.button
-                  onClick={showAIGeneration}
-                  className="rounded-lg bg-[#66B2FF] px-6 py-3 text-white transition-all hover:bg-[#66B2FF]/80"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Generate with AI
-                </motion.button>
+            <div className="space-y-3">
+              {/* Prompt */}
+              <div className="rounded bg-gray-800 p-2">
+                <p className="text-xs font-mono text-[#4ECDC4]">High-level request:</p>
+                <p className="mt-1 text-xs text-gray-300">{agenticPrompt}</p>
               </div>
-            ) : (
-              <div className="space-y-4">
-                {/* Prompt */}
-                <div className="rounded bg-gray-800 p-3">
-                  <p className="text-sm font-mono text-[#66B2FF]">Prompt:</p>
-                  <p className="mt-1 text-sm text-gray-300">{aiPrompt}</p>
-                </div>
 
-                {/* Generated Code */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: aiProgress > 0 ? 1 : 0, scale: aiProgress > 0 ? 1 : 0.95 }}
-                  transition={{ duration: 0.5 }}
-                  className="h-[300px] overflow-auto rounded bg-gray-900 p-4"
-                >
-                  <pre className="text-sm text-gray-300">
-                    <code>{aiGeneratedCode}</code>
-                  </pre>
-                </motion.div>
-              </div>
-            )}
+              {/* Agent Output */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="h-[270px] overflow-auto rounded bg-gray-900 p-3"
+              >
+                <pre className="text-xs text-gray-300 whitespace-pre-wrap">{agenticOutput}</pre>
+              </motion.div>
+            </div>
+            
+            <p className="mt-3 text-sm text-[#4ECDC4]">Complete microservice, deployed</p>
           </motion.div>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
           className="mt-8 text-center"
         >
           <p className="text-xl text-white/80">
-            Complete, tested, documented code with error handling in{' '}
-            <span className="font-bold text-[#66B2FF]">seconds</span>, not hours.
+            From hours to minutes to seconds. From code to solutions to{' '}
+            <span className="font-bold text-[#4ECDC4]">complete systems</span>.
           </p>
         </motion.div>
       </div>

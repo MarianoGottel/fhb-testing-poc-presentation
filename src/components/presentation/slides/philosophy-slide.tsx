@@ -5,11 +5,11 @@ import { SlideContainer } from '../slide-container'
 
 const taoQuote = [
   "The Builder stays behind,",
-  "that is why she's ahead.",
-  "She is detached,",
+  "that is why he's ahead.",
+  "He is detached,",
   "thus at one with all.",
   "Through selfless action",
-  "she is perfectly fulfilled."
+  "he is perfectly fulfilled."
 ]
 
 export function PhilosophySlide() {

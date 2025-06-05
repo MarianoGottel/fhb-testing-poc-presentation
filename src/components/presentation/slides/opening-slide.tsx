@@ -22,11 +22,12 @@ export function OpeningSlide() {
 
         {/* Main Title */}
         <motion.h1
-          className="mb-12 text-5xl font-bold text-transparent md:text-6xl lg:text-7xl xl:text-8xl"
+          className="mb-12 pb-2 text-5xl font-bold text-transparent md:text-6xl lg:text-7xl xl:text-8xl"
           style={{
             backgroundImage: 'linear-gradient(to right, #66B2FF, #4ECDC4)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
+            lineHeight: '1.2',
           }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

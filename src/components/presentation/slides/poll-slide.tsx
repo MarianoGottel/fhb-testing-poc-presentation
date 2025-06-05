@@ -53,7 +53,7 @@ export function PollSlide() {
           className="mt-12 text-center"
         >
           <p className="text-2xl text-white">
-            I understand each position.
+            We understand each position.
           </p>
           <p className="mt-2 text-2xl text-white">
             Because what's happening right now{' '}

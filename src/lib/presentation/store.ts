@@ -36,7 +36,7 @@ export interface PresentationState {
   resetPresentation: () => void
 }
 
-const TOTAL_SLIDES = 9 // 0-8 (including opening and closing)
+const TOTAL_SLIDES = 10 // 0-9 (including opening, closing, and skills)
 
 export const usePresentationStore = create<PresentationState>()(
   persist(
