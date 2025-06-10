@@ -6,8 +6,11 @@ import {
     AITestingTitleSlide,
     DemoShowcaseSlide,
     DeveloperTransformationSlide,
+    FutureOutlookSlide,
     ProblemSlide,
-    ProcessOverviewSlide
+    ProcessOverviewSlide,
+    WorkflowDetailsSlide,
+    WorkflowShowcaseSlide
 } from './slides';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
@@ -17,7 +20,10 @@ const slides = [
     { component: ProblemSlide, title: 'The Current POC' },
     { component: ProcessOverviewSlide, title: 'Aurora Process Overview' },
     { component: DemoShowcaseSlide, title: 'Two AI Workflows' },
-    { component: DeveloperTransformationSlide, title: 'The Developer Transformation' }
+    { component: WorkflowShowcaseSlide, title: 'AI Workflow Screenshots' },
+    { component: WorkflowDetailsSlide, title: 'Detailed Workflow Process' },
+    { component: DeveloperTransformationSlide, title: 'The Developer Transformation' },
+    { component: FutureOutlookSlide, title: 'Future Outlook' }
 ];
 
 export function AITestingPresentation() {
@@ -146,26 +152,34 @@ export function AITestingPresentation() {
                     }}
                 />
 
-                {/* Animated particles */}
-                {[...Array(15)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className='absolute h-1 w-1 rounded-full bg-[#66B2FF]/20'
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`
-                        }}
-                        animate={{
-                            scale: [0, 1, 0],
-                            opacity: [0, 0.6, 0]
-                        }}
-                        transition={{
-                            duration: 4 + Math.random() * 3,
-                            repeat: Infinity,
-                            delay: Math.random() * 5
-                        }}
-                    />
-                ))}
+                {/* Animated particles - using deterministic positions to avoid hydration errors */}
+                {[...Array(15)].map((_, i) => {
+                    // Create deterministic positions based on index to avoid hydration mismatches
+                    const left = (i * 37) % 100; // Pseudo-random but deterministic
+                    const top = (i * 73 + 23) % 100; // Pseudo-random but deterministic
+                    const duration = 4 + ((i * 0.3) % 3); // Deterministic duration
+                    const delay = (i * 0.4) % 5; // Deterministic delay
+
+                    return (
+                        <motion.div
+                            key={i}
+                            className='absolute h-1 w-1 rounded-full bg-[#66B2FF]/20'
+                            style={{
+                                left: `${left}%`,
+                                top: `${top}%`
+                            }}
+                            animate={{
+                                scale: [0, 1, 0],
+                                opacity: [0, 0.6, 0]
+                            }}
+                            transition={{
+                                duration: duration,
+                                repeat: Infinity,
+                                delay: delay
+                            }}
+                        />
+                    );
+                })}
             </div>
 
             {/* Main slide content */}

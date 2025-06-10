@@ -33,10 +33,10 @@ export function ProblemSlide() {
         {
             icon: AlertTriangle,
             title: 'Quality Blind Spots',
-            description: 'Multiple significant defects NOT uncovered',
-            impact: 'Most defects deemed minor or invalid',
+            description: 'Testing requirements created from own constraints, not user stories',
+            impact: 'Results in wrong testing requirements and defects.',
             color: '#FFB366',
-            rating: 'High Risk'
+            rating: 'Time consuming'
         },
         {
             icon: MessageSquareX,
@@ -45,6 +45,14 @@ export function ProblemSlide() {
             impact: 'Unproductive dialogue, handholding',
             color: '#FF6B6B',
             rating: 'Efficiency Loss'
+        },
+        {
+            icon: Workflow,
+            title: 'No Understanding of the Application',
+            description: 'No understanding for iterative approach and development',
+            impact: 'Not following the flow, unable to navigate application independently',
+            color: '#FF6B6B',
+            rating: 'Knowledge Gap'
         }
     ];
 
@@ -175,8 +183,8 @@ export function ProblemSlide() {
                             <div className='text-xs text-orange-300'>independent groups</div>
                         </div>
                         <div>
-                            <div className='text-3xl font-bold text-red-400'>Missed</div>
-                            <div className='text-sm text-white/70'>Significant defects</div>
+                            <div className='text-3xl font-bold text-red-400'>Lacks</div>
+                            <div className='text-sm text-white/70'>understandingof the application</div>
                             <div className='text-xs text-red-300'>due to knowledge gaps</div>
                         </div>
                     </div>

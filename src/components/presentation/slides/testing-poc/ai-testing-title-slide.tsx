@@ -17,25 +17,33 @@ export function AITestingTitleSlide() {
             <div className='relative text-center'>
                 {/* Animated background elements */}
                 <div className='absolute inset-0 overflow-hidden'>
-                    {[...Array(20)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className='absolute h-1 w-1 rounded-full bg-[#66B2FF]/30'
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`
-                            }}
-                            animate={{
-                                scale: [0, 1, 0],
-                                opacity: [0, 0.6, 0]
-                            }}
-                            transition={{
-                                duration: 3 + Math.random() * 2,
-                                repeat: Infinity,
-                                delay: Math.random() * 5
-                            }}
-                        />
-                    ))}
+                    {[...Array(20)].map((_, i) => {
+                        // Create deterministic positions based on index to avoid hydration mismatches
+                        const left = (i * 41) % 100; // Pseudo-random but deterministic
+                        const top = (i * 67 + 17) % 100; // Pseudo-random but deterministic
+                        const duration = 3 + ((i * 0.2) % 2); // Deterministic duration
+                        const delay = (i * 0.3) % 5; // Deterministic delay
+
+                        return (
+                            <motion.div
+                                key={i}
+                                className='absolute h-1 w-1 rounded-full bg-[#66B2FF]/30'
+                                style={{
+                                    left: `${left}%`,
+                                    top: `${top}%`
+                                }}
+                                animate={{
+                                    scale: [0, 1, 0],
+                                    opacity: [0, 0.6, 0]
+                                }}
+                                transition={{
+                                    duration: duration,
+                                    repeat: Infinity,
+                                    delay: delay
+                                }}
+                            />
+                        );
+                    })}
                 </div>
 
                 {/* Main title */}
