@@ -20,28 +20,28 @@ const slides = [
         alt: 'Create Test Cases - AI analyzes user story and generates test cases',
         title: 'Step 1: Create Test Cases',
         description:
-            'The agent analyzes and validates the user story (fetched from Jira). Based on acceptance criteria, it generates comprehensive test cases. Uses jira_get_issues and create_test_cases tools.'
+            'The agent analyzes and validates the user story which will be fetched from Jira. Based on the acceptance criteria, it generates comprehensive test cases.'
     },
     {
         src: '/images/step2GenerateComponent.png',
         alt: 'Generate Component - AI creates React component from Figma design',
         title: 'Step 2: Generate Component',
         description:
-            'The agent generates a React component based on Figma design and user story requirements. Uses create_screen tool.'
+            'The agent generates a React component based on Figma design and user story requirements. The agent will use our component library to generate the component.'
     },
     {
         src: '/images/step3GenerateStories.png',
         alt: 'Generate Stories - AI creates Storybook stories for component',
         title: 'Step 3: Generate Stories',
         description:
-            'The agent creates Storybook stories based on the test cases and component structure. Uses generate_storybook_testing_stories tool'
+            'The agent creates Storybook test scripts based on the test cases and component structure. The scripts focuses focus on failure cases and low level UI interactions.'
     },
     {
         src: '/images/step4DebugStories.png',
         alt: 'Debug Stories - AI iteratively fixes and validates Storybook tests',
         title: 'Step 4: Debug Stories',
         description:
-            'The agent iteratively debugs and validates the Storybook stories to ensure they work correctly. Uses browser_actions toolset.'
+            'The agent iteratively debugs and validates the Storybook test scripts through the browser to ensure they work correctly. An QA engineer will orchestrate th process and review the results.'
     }
 ];
 
