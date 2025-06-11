@@ -2,14 +2,15 @@
 
 import { SlideContainer } from '../../slide-container';
 import { motion } from 'framer-motion';
-import { AlertTriangle, Bot, FileText, Play, Settings, Shield, Users, Zap } from 'lucide-react';
+import { AlertTriangle, Bot, FileText, Play, Settings, Shield, Telescope, Users, Zap } from 'lucide-react';
 
 export function AITestingTitleSlide() {
     const presentationStructure = [
         { title: 'Issues with current POC', icon: AlertTriangle, color: '#FF6B6B' },
         { title: 'Aurora Process Overview', icon: Settings, color: '#66B2FF' },
         { title: 'AI Workflow', icon: Play, color: '#4ECDC4' },
-        { title: 'Developer Transformation', icon: Users, color: '#66B2FF' }
+        { title: 'Developer Transformation', icon: Users, color: '#66B2FF' },
+        { title: 'Future Outlook', icon: Telescope, color: '#4ECDC4' }
     ];
 
     return (
@@ -93,7 +94,7 @@ export function AITestingTitleSlide() {
                         className='mx-auto max-w-5xl'>
                         <div className='rounded-xl bg-black/40 p-8 backdrop-blur-sm'>
                             <h3 className='mb-6 text-2xl font-bold text-white'>Presentation Overview</h3>
-                            <div className='grid grid-cols-2 gap-6 md:grid-cols-4'>
+                            <div className='grid grid-cols-2 gap-6 md:grid-cols-5'>
                                 {presentationStructure.map((item, index) => {
                                     const Icon = item.icon;
 

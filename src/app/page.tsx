@@ -13,7 +13,7 @@ export default function Home() {
                 <Link
                     href='/ai-testing'
                     className='rounded-lg bg-[#4ECDC4] px-8 py-4 text-xl font-semibold text-black transition-all hover:bg-[#4ECDC4]/80'>
-                    AI-Powered Testing Revolution
+                    Aurora AI Testing POC
                 </Link>
                 <Link
                     href='/presentation/presenter'
