@@ -188,8 +188,8 @@ export function ProblemSlide() {
                         </div>
                         <div>
                             <div className='text-3xl font-bold text-red-400'>Lacks</div>
-                            <div className='text-sm text-white/70'>understandingof the application</div>
-                            <div className='text-xs text-red-300'>due to knowledge gaps</div>
+                            <div className='text-sm text-white/70'>understanding of the application</div>
+                            <div className='text-xs text-red-300'>due to knowledge gaps/ interest</div>
                         </div>
                     </div>
 
