@@ -23,12 +23,12 @@ export function ProcessOverviewSlide() {
     const auroraProcess = [
         // Phase 1: Planning & Design (Steps 1-7)
         { step: 1, title: 'Product Research', icon: Search, phase: 'Planning', aiEnhanced: false },
-        { step: 2, title: 'User Journey', icon: MapPin, phase: 'Planning', aiEnhanced: false },
-        { step: 3, title: 'Technical Architecture', icon: Building, phase: 'Planning', aiEnhanced: false },
-        { step: 4, title: 'Project Workstreams', icon: Users, phase: 'Planning', aiEnhanced: false },
+        { step: 2, title: 'User Journey Definition', icon: MapPin, phase: 'Planning', aiEnhanced: true },
+        { step: 3, title: 'Technical Architecture', icon: Building, phase: 'Planning', aiEnhanced: true },
+        { step: 4, title: 'Project Workstreams & Tasks (Jira)', icon: Users, phase: 'Planning', aiEnhanced: true },
         { step: 5, title: 'Screen Specification', icon: FileText, phase: 'Planning', aiEnhanced: false },
         { step: 6, title: 'Final Design', icon: Palette, phase: 'Planning', aiEnhanced: false },
-        { step: 7, title: 'Test Definition', icon: TestTube, phase: 'Planning', aiEnhanced: true },
+        { step: 7, title: 'Define Test Cases and Test Scripts', icon: TestTube, phase: 'Planning', aiEnhanced: true },
 
         // Phase 2: Development & Delivery (Steps 8-14)
         { step: 8, title: 'Code Development', icon: Code, phase: 'Development', aiEnhanced: true },
@@ -192,7 +192,7 @@ export function ProcessOverviewSlide() {
                             <div className='text-sm text-white/70'>Total Process Steps</div>
                         </div>
                         <div className='text-center'>
-                            <div className='mb-2 text-3xl font-bold text-[#66B2FF]'>4</div>
+                            <div className='mb-2 text-3xl font-bold text-[#66B2FF]'>7</div>
                             <div className='text-sm text-white/70'>AI Enhanced Steps</div>
                         </div>
                         <div className='text-center'>

@@ -2,12 +2,12 @@
 
 import { SlideContainer } from '../../slide-container';
 import { motion } from 'framer-motion';
-import { Code, Eye, Settings, TrendingUp, Users, Zap } from 'lucide-react';
+import { Bot, Code, Eye, Settings, TrendingUp, Users, Zap } from 'lucide-react';
 
 export function DeveloperTransformationSlide() {
     const roleTransformation = [
         {
-            title: 'Before: Direct Development',
+            title: 'Before: Manual Development',
             activities: [
                 'Manual test case creation',
                 'Hand-coding components',
@@ -146,6 +146,12 @@ export function DeveloperTransformationSlide() {
                                                 <Eye className='h-3 w-3 text-[#66B2FF]' />
                                                 <span className='text-xs text-white/80'>Validate AI outputs</span>
                                             </div>
+                                            <div className='flex items-center space-x-2'>
+                                                <Bot className='h-3 w-3 text-[#66B2FF]' />
+                                                <span className='text-xs text-white/80'>
+                                                    Control & Orchestrate agents
+                                                </span>
+                                            </div>
                                         </div>
                                         <div className='space-y-1'>
                                             <div className='flex items-center space-x-2'>
@@ -170,7 +176,7 @@ export function DeveloperTransformationSlide() {
                                             </span>
                                         </div>
                                         <div className='flex items-center justify-between'>
-                                            <span className='text-xs text-white/70'>Time coding:</span>
+                                            <span className='text-xs text-white/70'>Manual effort:</span>
                                             <span className='text-sm font-bold text-[#4ECDC4]'>Only 20%</span>
                                         </div>
                                     </div>
