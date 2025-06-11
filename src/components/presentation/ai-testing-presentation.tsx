@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePresentationStore } from '@/lib/presentation/store';
+
 import {
     AITestingTitleSlide,
     DemoShowcaseSlide,
@@ -23,7 +25,19 @@ const slides = [
 ];
 
 export function AITestingPresentation() {
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const {
+        currentSlide,
+        nextSlide,
+        previousSlide,
+        goToSlide,
+        isPresenterMode,
+        togglePresenterMode,
+        isProcessSlideshowOpen
+    } = usePresentationStore();
+
+    // Debug logging
+    console.log('AITestingPresentation render - isProcessSlideshowOpen:', isProcessSlideshowOpen);
+
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -32,15 +46,11 @@ export function AITestingPresentation() {
         if (!isPlaying) return;
 
         const timer = setInterval(() => {
-            setCurrentSlide((prev) => {
-                if (prev === slides.length - 1) {
-                    setIsPlaying(false);
-
-                    return prev;
-                }
-
-                return prev + 1;
-            });
+            if (currentSlide === slides.length - 1) {
+                setIsPlaying(false);
+            } else {
+                nextSlide();
+            }
         }, 15000); // 15 seconds per slide
 
         return () => clearInterval(timer);
@@ -57,7 +67,7 @@ export function AITestingPresentation() {
                     break;
                 case 'ArrowLeft':
                     e.preventDefault();
-                    prevSlide();
+                    previousSlide();
                     break;
                 case 'Escape':
                     e.preventDefault();
@@ -71,7 +81,7 @@ export function AITestingPresentation() {
                 case 'r':
                 case 'R':
                     e.preventDefault();
-                    setCurrentSlide(0);
+                    goToSlide(0);
                     setIsPlaying(false);
                     break;
             }
@@ -81,18 +91,6 @@ export function AITestingPresentation() {
 
         return () => document.removeEventListener('keydown', handleKeyPress);
     }, []);
-
-    const nextSlide = () => {
-        if (currentSlide < slides.length - 1) {
-            setCurrentSlide(currentSlide + 1);
-        }
-    };
-
-    const prevSlide = () => {
-        if (currentSlide > 0) {
-            setCurrentSlide(currentSlide - 1);
-        }
-    };
 
     const toggleFullscreen = async () => {
         try {
@@ -193,96 +191,102 @@ export function AITestingPresentation() {
                 </AnimatePresence>
             </div>
 
-            {/* Navigation controls */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-                className='absolute bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center space-x-4 rounded-full bg-black/60 p-4 backdrop-blur-sm'>
-                {/* Previous button */}
-                <button
-                    onClick={prevSlide}
-                    disabled={currentSlide === 0}
-                    className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
-                    <ChevronLeft className='h-5 w-5 text-white' />
-                </button>
-
-                {/* Play/Pause button */}
-                <button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className='rounded-full bg-[#66B2FF]/20 p-2 transition-all hover:bg-[#66B2FF]/30'>
-                    {isPlaying ? (
-                        <Pause className='h-5 w-5 text-[#66B2FF]' />
-                    ) : (
-                        <Play className='h-5 w-5 text-[#66B2FF]' />
-                    )}
-                </button>
-
-                {/* Restart button */}
-                <button
-                    onClick={() => {
-                        setCurrentSlide(0);
-                        setIsPlaying(false);
-                    }}
-                    className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20'>
-                    <RotateCcw className='h-5 w-5 text-white' />
-                </button>
-
-                {/* Slide indicator */}
-                <div className='flex items-center space-x-2'>
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentSlide(index)}
-                            className={`h-2 w-2 rounded-full transition-all ${
-                                index === currentSlide ? 'w-8 bg-[#66B2FF]' : 'bg-white/30 hover:bg-white/50'
-                            }`}
-                        />
-                    ))}
-                </div>
-
-                {/* Next button */}
-                <button
-                    onClick={nextSlide}
-                    disabled={currentSlide === slides.length - 1}
-                    className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
-                    <ChevronRight className='h-5 w-5 text-white' />
-                </button>
-
-                {/* Fullscreen button */}
-                <button
-                    onClick={toggleFullscreen}
-                    className='ml-2 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20'>
-                    <span className='font-mono text-xs text-white'>F</span>
-                </button>
-            </motion.div>
-
-            {/* Slide title and progress */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className='absolute top-6 left-6 z-50'>
-                <div className='rounded-lg bg-black/60 p-3 backdrop-blur-sm'>
-                    <div className='text-sm font-medium text-[#4ECDC4]'>
-                        {currentSlide + 1} / {slides.length}
-                    </div>
-                    <div className='text-lg font-semibold text-white'>{slides[currentSlide].title}</div>
-                </div>
-            </motion.div>
-
-            {/* Progress bar */}
-            <div className='absolute top-0 right-0 left-0 z-50 h-1 bg-black/20'>
+            {/* Navigation controls - Hidden when process slideshow is open */}
+            {!isProcessSlideshowOpen && (
                 <motion.div
-                    className='h-full bg-gradient-to-r from-[#66B2FF] to-[#4ECDC4]'
-                    initial={{ width: 0 }}
-                    animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
-                    transition={{ duration: 0.5 }}
-                />
-            </div>
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                    className='absolute bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center space-x-4 rounded-full bg-black/60 p-4 backdrop-blur-sm'>
+                    {/* Previous button */}
+                    <button
+                        onClick={previousSlide}
+                        disabled={currentSlide === 0}
+                        className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
+                        <ChevronLeft className='h-5 w-5 text-white' />
+                    </button>
 
-            {/* Keyboard shortcuts help */}
-            {!isFullscreen && (
+                    {/* Play/Pause button */}
+                    <button
+                        onClick={() => setIsPlaying(!isPlaying)}
+                        className='rounded-full bg-[#66B2FF]/20 p-2 transition-all hover:bg-[#66B2FF]/30'>
+                        {isPlaying ? (
+                            <Pause className='h-5 w-5 text-[#66B2FF]' />
+                        ) : (
+                            <Play className='h-5 w-5 text-[#66B2FF]' />
+                        )}
+                    </button>
+
+                    {/* Restart button */}
+                    <button
+                        onClick={() => {
+                            goToSlide(0);
+                            setIsPlaying(false);
+                        }}
+                        className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20'>
+                        <RotateCcw className='h-5 w-5 text-white' />
+                    </button>
+
+                    {/* Slide indicator */}
+                    <div className='flex items-center space-x-2'>
+                        {slides.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                className={`h-2 w-2 rounded-full transition-all ${
+                                    index === currentSlide ? 'w-8 bg-[#66B2FF]' : 'bg-white/30 hover:bg-white/50'
+                                }`}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Next button */}
+                    <button
+                        onClick={nextSlide}
+                        disabled={currentSlide === slides.length - 1}
+                        className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
+                        <ChevronRight className='h-5 w-5 text-white' />
+                    </button>
+
+                    {/* Fullscreen button */}
+                    <button
+                        onClick={toggleFullscreen}
+                        className='ml-2 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20'>
+                        <span className='font-mono text-xs text-white'>F</span>
+                    </button>
+                </motion.div>
+            )}
+
+            {/* Slide title and progress - Hidden when process slideshow is open */}
+            {!isProcessSlideshowOpen && (
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className='absolute top-6 left-6 z-50'>
+                    <div className='rounded-lg bg-black/60 p-3 backdrop-blur-sm'>
+                        <div className='text-sm font-medium text-[#4ECDC4]'>
+                            {currentSlide + 1} / {slides.length}
+                        </div>
+                        <div className='text-lg font-semibold text-white'>{slides[currentSlide].title}</div>
+                    </div>
+                </motion.div>
+            )}
+
+            {/* Progress bar - Hidden when process slideshow is open */}
+            {!isProcessSlideshowOpen && (
+                <div className='absolute top-0 right-0 left-0 z-50 h-1 bg-black/20'>
+                    <motion.div
+                        className='h-full bg-gradient-to-r from-[#66B2FF] to-[#4ECDC4]'
+                        initial={{ width: 0 }}
+                        animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+                        transition={{ duration: 0.5 }}
+                    />
+                </div>
+            )}
+
+            {/* Keyboard shortcuts help - Hidden when process slideshow is open */}
+            {!isFullscreen && !isProcessSlideshowOpen && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

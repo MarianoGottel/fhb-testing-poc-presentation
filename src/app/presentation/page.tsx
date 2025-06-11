@@ -1,52 +1,53 @@
-'use client'
+'use client';
 
-import { AnimatePresence } from 'framer-motion'
-import { PresentationContainer } from '@/components/presentation/presentation-container'
-import { NavigationControls } from '@/components/presentation/navigation-controls'
-import { useKeyboardNavigation } from '@/hooks/presentation/use-keyboard-navigation'
-import { useTouchNavigation } from '@/hooks/presentation/use-touch-navigation'
-import { usePresentationStore } from '@/lib/presentation/store'
-import { getSlideByIndex } from '@/lib/presentation/slides'
+import { NavigationControls } from '@/components/presentation/navigation-controls';
+import { PresentationContainer } from '@/components/presentation/presentation-container';
 import {
-  OpeningSlide,
-  MirrorSlide,
-  PollSlide,
-  WaterSlide,
-  EvolutionSlide,
-  DemoSlide,
-  PhilosophySlide,
-  PhoenixSlide,
-  ClosingSlide,
-  SkillsSlide,
-} from '@/components/presentation/slides'
+    ClosingSlide,
+    DemoSlide,
+    EvolutionSlide,
+    MirrorSlide,
+    OpeningSlide,
+    PhilosophySlide,
+    PhoenixSlide,
+    PollSlide,
+    SkillsSlide,
+    WaterSlide
+} from '@/components/presentation/slides';
+import { useKeyboardNavigation } from '@/hooks/presentation/use-keyboard-navigation';
+import { useTouchNavigation } from '@/hooks/presentation/use-touch-navigation';
+import { getSlideByIndex } from '@/lib/presentation/slides';
+import { usePresentationStore } from '@/lib/presentation/store';
+
+import { AnimatePresence } from 'framer-motion';
 
 const slideComponents = [
-  OpeningSlide,
-  MirrorSlide,
-  PollSlide,
-  WaterSlide,
-  EvolutionSlide,
-  DemoSlide,
-  PhilosophySlide,
-  PhoenixSlide,
-  ClosingSlide,
-  SkillsSlide,
-]
+    OpeningSlide,
+    MirrorSlide,
+    PollSlide,
+    WaterSlide,
+    EvolutionSlide,
+    DemoSlide,
+    PhilosophySlide,
+    PhoenixSlide,
+    ClosingSlide,
+    SkillsSlide
+];
 
 export default function PresentationPage() {
-  const { currentSlide } = usePresentationStore()
-  useKeyboardNavigation()
-  useTouchNavigation()
+    const { currentSlide } = usePresentationStore();
+    useKeyboardNavigation();
+    useTouchNavigation();
 
-  const CurrentSlideComponent = slideComponents[currentSlide]
-  const slideMetadata = getSlideByIndex(currentSlide)
+    const CurrentSlideComponent = slideComponents[currentSlide];
+    const slideMetadata = getSlideByIndex(currentSlide);
 
-  return (
-    <PresentationContainer>
-      <AnimatePresence mode="wait">
-        <CurrentSlideComponent key={`slide-${currentSlide}`} />
-      </AnimatePresence>
-      <NavigationControls />
-    </PresentationContainer>
-  )
+    return (
+        <PresentationContainer>
+            <AnimatePresence mode='wait'>
+                <CurrentSlideComponent key={`slide-${currentSlide}`} />
+            </AnimatePresence>
+            <NavigationControls />
+        </PresentationContainer>
+    );
 }

@@ -58,14 +58,16 @@ export function NavigationControls() {
                 </div>
             )}
 
-            {/* Fullscreen toggle - Always visible */}
-            <Button
-                variant='ghost'
-                size='icon'
-                onClick={toggleFullscreen}
-                className='fixed right-4 bottom-4 text-white hover:bg-white/10'>
-                {isFullscreen ? <Minimize2 className='h-5 w-5' /> : <Maximize2 className='h-5 w-5' />}
-            </Button>
+            {/* Fullscreen toggle - Hidden when process slideshow is open */}
+            {!isProcessSlideshowOpen && (
+                <Button
+                    variant='ghost'
+                    size='icon'
+                    onClick={toggleFullscreen}
+                    className='fixed right-4 bottom-4 text-white hover:bg-white/10'>
+                    {isFullscreen ? <Minimize2 className='h-5 w-5' /> : <Maximize2 className='h-5 w-5' />}
+                </Button>
+            )}
 
             {/* Keyboard hints - Hidden when process slideshow is open */}
             {!isProcessSlideshowOpen && (
