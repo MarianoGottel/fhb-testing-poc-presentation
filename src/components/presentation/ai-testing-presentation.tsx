@@ -8,9 +8,7 @@ import {
     DeveloperTransformationSlide,
     FutureOutlookSlide,
     ProblemSlide,
-    ProcessOverviewSlide,
-    WorkflowDetailsSlide,
-    WorkflowShowcaseSlide
+    ProcessOverviewSlide
 } from './slides';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
@@ -20,8 +18,6 @@ const slides = [
     { component: ProblemSlide, title: 'The Current POC' },
     { component: ProcessOverviewSlide, title: 'Aurora Process Overview' },
     { component: DemoShowcaseSlide, title: 'Two AI Workflows' },
-    { component: WorkflowShowcaseSlide, title: 'AI Workflow Screenshots' },
-    { component: WorkflowDetailsSlide, title: 'Detailed Workflow Process' },
     { component: DeveloperTransformationSlide, title: 'The Developer Transformation' },
     { component: FutureOutlookSlide, title: 'Future Outlook' }
 ];
