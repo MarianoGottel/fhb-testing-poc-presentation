@@ -87,7 +87,11 @@ export function ProblemSlide() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
                     className='mb-6 rounded-xl border border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20 p-4'>
-                    <h3 className='mb-3 text-center text-xl font-bold text-white'>Significant Assessment Divergence</h3>
+                    <h3 className='mb-2 text-center text-xl font-bold text-white'>Significant Assessment Divergence</h3>
+                    <p className='mb-4 text-center text-sm text-white/70'>
+                        Rating Scale: <span className='text-red-400'>1 = Very negative/unproductive</span> •{' '}
+                        <span className='text-[#4ECDC4]'>10 = Extremely positive/helpful</span>
+                    </p>
                     <div className='grid gap-3 md:grid-cols-3'>
                         {assessmentResults.map((result, index) => (
                             <motion.div
