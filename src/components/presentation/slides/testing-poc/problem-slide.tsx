@@ -63,7 +63,9 @@ export function ProblemSlide() {
     ];
 
     return (
-        <SlideContainer transition='slide' className='bg-gradient-to-br from-[#0A0A0A] via-[#1A0A0A] to-[#0A0A0A]'>
+        <SlideContainer
+            transition='slide'
+            className='justify-start bg-gradient-to-br from-[#0A0A0A] via-[#1A0A0A] to-[#0A0A0A] py-12'>
             <div className='w-full max-w-7xl'>
                 <motion.h2
                     className='mb-3 text-center text-4xl font-bold text-white'

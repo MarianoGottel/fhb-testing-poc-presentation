@@ -50,7 +50,9 @@ export function ProcessOverviewSlide() {
     const developmentSteps = auroraProcess.filter((step) => step.phase === 'Development');
 
     return (
-        <SlideContainer transition='slide' className='bg-gradient-to-br from-[#0A0A0A] via-[#001833] to-[#0A0A0A]'>
+        <SlideContainer
+            transition='slide'
+            className='justify-start bg-gradient-to-br from-[#0A0A0A] via-[#001833] to-[#0A0A0A] py-12'>
             <div className='w-full max-w-7xl'>
                 <motion.h2
                     className='mb-3 text-center text-5xl font-bold text-white'

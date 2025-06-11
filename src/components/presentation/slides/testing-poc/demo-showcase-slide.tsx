@@ -48,10 +48,12 @@ export function DemoShowcaseSlide() {
 
     return (
         <>
-            <SlideContainer transition='slide' className='bg-gradient-to-br from-[#0A0A0A] via-[#0A0A1A] to-[#0A0A0A]'>
-                <div className='w-full max-w-7xl'>
+            <SlideContainer
+                transition='slide'
+                className='justify-start bg-gradient-to-br from-[#0A0A0A] via-[#0A0A1A] to-[#0A0A0A] py-12'>
+                <div className='flex w-full max-w-7xl flex-col'>
                     <motion.h2
-                        className='mb-3 text-center text-5xl font-bold text-white'
+                        className='mb-6 text-center text-5xl font-bold text-white md:text-6xl lg:text-7xl'
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}>
@@ -59,13 +61,15 @@ export function DemoShowcaseSlide() {
                     </motion.h2>
 
                     <motion.p
-                        className='mb-6 text-center text-xl text-[#4ECDC4]'
+                        className='mb-8 text-center text-3xl font-light text-[#4ECDC4] md:text-4xl'
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}></motion.p>
+                        transition={{ delay: 0.3, duration: 0.6 }}>
+                        Two powerful AI-driven development workflows
+                    </motion.p>
 
                     {/* Demo results */}
-                    <div className='mb-6 grid gap-4 md:grid-cols-2'>
+                    <div className='mb-8 grid gap-6 md:grid-cols-2'>
                         {demoResults.map((demo, index) => {
                             const Icon = demo.icon;
 
@@ -76,7 +80,7 @@ export function DemoShowcaseSlide() {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     transition={{ delay: 0.5 + index * 0.2, duration: 0.6 }}
                                     whileHover={{ scale: 1.02, y: -5 }}
-                                    className='group relative overflow-hidden rounded-xl border border-white/20 bg-black/40 p-4'>
+                                    className='group relative overflow-hidden rounded-xl border border-white/20 bg-black/40 p-6'>
                                     {/* Background gradient */}
                                     <div
                                         className='absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20'
@@ -86,31 +90,33 @@ export function DemoShowcaseSlide() {
                                     />
 
                                     <div className='relative z-10'>
-                                        <div className='mb-3 flex items-center space-x-3'>
+                                        <div className='mb-4 flex items-center space-x-4'>
                                             <div
-                                                className='rounded-lg p-2'
+                                                className='rounded-lg p-3'
                                                 style={{ backgroundColor: `${demo.color}20` }}>
-                                                <Icon className='h-5 w-5' style={{ color: demo.color }} />
+                                                <Icon className='h-6 w-6' style={{ color: demo.color }} />
                                             </div>
                                             <div>
-                                                <h3 className='text-lg font-semibold text-white'>{demo.title}</h3>
-                                                <p className='text-xs text-white/60'>{demo.description}</p>
+                                                <h3 className='text-xl font-semibold text-white'>{demo.title}</h3>
+                                                <p className='text-base text-white/60'>{demo.description}</p>
                                             </div>
                                         </div>
 
-                                        <div className='space-y-2'>
+                                        <div className='space-y-3'>
                                             <div className='flex items-center justify-between'>
-                                                <span className='text-white/60'>AI Time:</span>
-                                                <span className='font-bold' style={{ color: demo.color }}>
+                                                <span className='text-base text-white/70'>AI Time:</span>
+                                                <span className='text-lg font-bold' style={{ color: demo.color }}>
                                                     {demo.time}
                                                 </span>
                                             </div>
                                             <div className='flex items-center justify-between'>
-                                                <span className='text-white/60'>Manual Time:</span>
-                                                <span className='text-red-400 line-through'>{demo.oldTime}</span>
+                                                <span className='text-base text-white/70'>Manual Time:</span>
+                                                <span className='text-lg text-red-400 line-through'>
+                                                    {demo.oldTime}
+                                                </span>
                                             </div>
-                                            <div className='mt-2 text-center'>
-                                                <span className='rounded-full bg-green-900/40 px-3 py-1 text-sm font-medium text-green-400'>
+                                            <div className='mt-3 text-center'>
+                                                <span className='rounded-full bg-green-900/40 px-4 py-2 text-base font-medium text-green-400'>
                                                     {demo.improvement} ⚡
                                                 </span>
                                             </div>

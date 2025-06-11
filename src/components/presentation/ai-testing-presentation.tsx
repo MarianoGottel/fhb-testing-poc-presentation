@@ -40,6 +40,7 @@ export function AITestingPresentation() {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [showNavigation, setShowNavigation] = useState(true);
 
     // Auto-advance slides when playing
     useEffect(() => {
@@ -56,9 +57,42 @@ export function AITestingPresentation() {
         return () => clearInterval(timer);
     }, [isPlaying, currentSlide]);
 
+    // Auto-hide navigation after 3 seconds
+    useEffect(() => {
+        setShowNavigation(true);
+
+        const hideTimer = setTimeout(() => {
+            setShowNavigation(false);
+        }, 3000);
+
+        return () => clearTimeout(hideTimer);
+    }, [currentSlide]); // Reset timer when slide changes
+
+    // Show navigation on mouse movement
+    useEffect(() => {
+        const handleMouseMove = () => {
+            setShowNavigation(true);
+        };
+
+        const handleKeyPress = () => {
+            setShowNavigation(true);
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
+
     // Keyboard navigation
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
+            // Show navigation on any keyboard interaction
+            setShowNavigation(true);
+
             switch (e.key) {
                 case 'ArrowRight':
                 case ' ':
@@ -128,7 +162,7 @@ export function AITestingPresentation() {
         return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
     }, []);
 
-    const CurrentSlideComponent = slides[currentSlide].component;
+    const CurrentSlideComponent = slides[currentSlide]?.component;
 
     return (
         <div className='relative h-screen w-screen overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-[#001833]'>
@@ -191,16 +225,19 @@ export function AITestingPresentation() {
                 </AnimatePresence>
             </div>
 
-            {/* Navigation controls - Hidden when process slideshow is open */}
-            {!isProcessSlideshowOpen && (
+            {/* Navigation controls - Hidden when process slideshow is open or in fullscreen */}
+            {!isProcessSlideshowOpen && !isFullscreen && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
+                    animate={{ opacity: showNavigation ? 1 : 0, y: showNavigation ? 0 : 20 }}
+                    transition={{ duration: 0.3 }}
                     className='absolute bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center space-x-4 rounded-full bg-black/60 p-4 backdrop-blur-sm'>
                     {/* Previous button */}
                     <button
-                        onClick={previousSlide}
+                        onClick={() => {
+                            setShowNavigation(true);
+                            previousSlide();
+                        }}
                         disabled={currentSlide === 0}
                         className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
                         <ChevronLeft className='h-5 w-5 text-white' />
@@ -208,7 +245,10 @@ export function AITestingPresentation() {
 
                     {/* Play/Pause button */}
                     <button
-                        onClick={() => setIsPlaying(!isPlaying)}
+                        onClick={() => {
+                            setShowNavigation(true);
+                            setIsPlaying(!isPlaying);
+                        }}
                         className='rounded-full bg-[#66B2FF]/20 p-2 transition-all hover:bg-[#66B2FF]/30'>
                         {isPlaying ? (
                             <Pause className='h-5 w-5 text-[#66B2FF]' />
@@ -220,6 +260,7 @@ export function AITestingPresentation() {
                     {/* Restart button */}
                     <button
                         onClick={() => {
+                            setShowNavigation(true);
                             goToSlide(0);
                             setIsPlaying(false);
                         }}
@@ -232,7 +273,10 @@ export function AITestingPresentation() {
                         {slides.map((_, index) => (
                             <button
                                 key={index}
-                                onClick={() => goToSlide(index)}
+                                onClick={() => {
+                                    setShowNavigation(true);
+                                    goToSlide(index);
+                                }}
                                 className={`h-2 w-2 rounded-full transition-all ${
                                     index === currentSlide ? 'w-8 bg-[#66B2FF]' : 'bg-white/30 hover:bg-white/50'
                                 }`}
@@ -242,7 +286,10 @@ export function AITestingPresentation() {
 
                     {/* Next button */}
                     <button
-                        onClick={nextSlide}
+                        onClick={() => {
+                            setShowNavigation(true);
+                            nextSlide();
+                        }}
                         disabled={currentSlide === slides.length - 1}
                         className='rounded-full bg-white/10 p-2 transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-30'>
                         <ChevronRight className='h-5 w-5 text-white' />
@@ -250,47 +297,53 @@ export function AITestingPresentation() {
 
                     {/* Fullscreen button */}
                     <button
-                        onClick={toggleFullscreen}
+                        onClick={() => {
+                            setShowNavigation(true);
+                            toggleFullscreen();
+                        }}
                         className='ml-2 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20'>
                         <span className='font-mono text-xs text-white'>F</span>
                     </button>
                 </motion.div>
             )}
 
-            {/* Slide title and progress - Hidden when process slideshow is open */}
-            {!isProcessSlideshowOpen && (
+            {/* Slide title and progress - Hidden when process slideshow is open or in fullscreen */}
+            {!isProcessSlideshowOpen && !isFullscreen && (
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
+                    animate={{ opacity: showNavigation ? 1 : 0, x: showNavigation ? 0 : -20 }}
+                    transition={{ duration: 0.3 }}
                     className='absolute top-6 left-6 z-50'>
                     <div className='rounded-lg bg-black/60 p-3 backdrop-blur-sm'>
                         <div className='text-sm font-medium text-[#4ECDC4]'>
                             {currentSlide + 1} / {slides.length}
                         </div>
-                        <div className='text-lg font-semibold text-white'>{slides[currentSlide].title}</div>
+                        <div className='text-lg font-semibold text-white'>{slides[currentSlide]?.title}</div>
                     </div>
                 </motion.div>
             )}
 
-            {/* Progress bar - Hidden when process slideshow is open */}
-            {!isProcessSlideshowOpen && (
-                <div className='absolute top-0 right-0 left-0 z-50 h-1 bg-black/20'>
+            {/* Progress bar - Hidden when process slideshow is open or in fullscreen */}
+            {!isProcessSlideshowOpen && !isFullscreen && (
+                <motion.div
+                    className='absolute top-0 right-0 left-0 z-50 h-1 bg-black/20'
+                    animate={{ opacity: showNavigation ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}>
                     <motion.div
                         className='h-full bg-gradient-to-r from-[#66B2FF] to-[#4ECDC4]'
                         initial={{ width: 0 }}
                         animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
                         transition={{ duration: 0.5 }}
                     />
-                </div>
+                </motion.div>
             )}
 
             {/* Keyboard shortcuts help - Hidden when process slideshow is open */}
             {!isFullscreen && !isProcessSlideshowOpen && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2 }}
+                    animate={{ opacity: showNavigation ? 1 : 0, y: showNavigation ? 0 : 20 }}
+                    transition={{ duration: 0.3 }}
                     className='absolute right-6 bottom-6 z-50 rounded-lg bg-black/60 p-3 text-xs text-white/60 backdrop-blur-sm'>
                     <div>← → Navigate • Space: Next • F: Fullscreen • R: Restart</div>
                 </motion.div>

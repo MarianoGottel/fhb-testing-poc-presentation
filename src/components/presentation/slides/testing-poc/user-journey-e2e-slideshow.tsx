@@ -17,24 +17,25 @@ interface UserJourneyE2ESlideshowProps {
 
 const slides = [
     {
-        src: '/images/getUserJourney.png',
-        alt: 'Get User Journey - AI analyzes application workflow',
-        title: 'Step 1: Get User Journey',
-        description: 'The agent retrieves the current user journey and understands the flow.'
+        src: '/images/userJourneyGeneration.png',
+        alt: 'User Journey Generation - AI creates user journey from user story',
+        title: 'Step 1: User Journey Generation',
+        description:
+            'The agent creates a comprehensive user journey from a user story that can be used in the follow-up process. This structured approach ensures all user interactions and workflows are properly mapped for testing.'
     },
     {
-        src: '/images/navigationPOM.png',
-        alt: 'Navigation POM - Page Object Models generation',
-        title: 'Step 2: Navigation POM Generation',
+        src: '/images/appNavigation.png',
+        alt: 'Application Navigation - AI navigates and creates Page Object Models',
+        title: 'Step 2: Application Navigation & POM Creation',
         description:
-            'The agent opens the browser and navigates through the screen, filling forms and clicking buttons. Based on these information, the agent creates a Page Model which is used as the base for the test.'
+            'The agent navigates through the app autonomously, creating Page Object Models (POMs) during the process. POMs store critical information about how each page needs to be navigated and interacted with. The agent requires this structured information to create accurate tests later on. The POMs ensure high quality tests and are reusable across E2E tests, cross-system integration, performance-load, production verification, and smoke tests.'
     },
     {
-        src: '/images/e2eTest.png',
-        alt: 'E2E Test - Complete test suite execution',
-        title: 'Step 3: E2E Test Execution',
+        src: '/images/playwright.png',
+        alt: 'Playwright Test Generation - Complete E2E test script creation',
+        title: 'Step 3: Playwright Test Generation',
         description:
-            'The agent executes the e2e test iteratively through the process. Every time a new page model is created, the e2e test is updated and validated.'
+            'The agent generates a complete E2E Playwright test script from the POMs. These generated E2E Tests are automatically triggered in the deployment process to ensure regression. They are reviewed by QA Engineers to ensure all test criteria are met and validate the comprehensive test coverage.'
     }
 ];
 
@@ -132,66 +133,67 @@ export function UserJourneyE2ESlideshow({ isOpen, onClose }: UserJourneyE2ESlide
                             </span>
                         </div>
 
-                        <div className='flex h-full w-full max-w-7xl flex-col pt-4'>
+                        <div className='flex h-full w-full flex-col pt-2'>
                             {/* Slide title */}
                             <motion.h2
                                 key={currentSlide}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className='mb-2 text-center text-3xl font-bold text-white'>
+                                className='mb-4 text-center text-3xl font-bold text-white'>
                                 {slides[currentSlide].title}
                             </motion.h2>
 
-                            {/* Description Panel - Top */}
-                            <motion.div
-                                key={`desc-${currentSlide}`}
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4, delay: 0.1 }}
-                                className='mx-auto mb-4 max-w-4xl rounded-lg border border-gray-600 bg-gradient-to-r from-gray-900/80 to-gray-800/80 p-6 backdrop-blur-sm'>
-                                <div className='text-center'>
-                                    <div className='mb-3 flex items-center justify-center space-x-2'>
+                            {/* Main content - Side by side layout */}
+                            <div className='flex flex-1 gap-4 px-4'>
+                                {/* Navigation and Screenshot - Left Side */}
+                                <div className='flex flex-1 items-center gap-2'>
+                                    {/* Previous Button */}
+                                    <button
+                                        onClick={prevSlide}
+                                        disabled={currentSlide === 0}
+                                        className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-600/80 text-white backdrop-blur-sm transition-all hover:bg-blue-700 disabled:bg-gray-600/50 disabled:opacity-50'>
+                                        <ChevronLeft className='h-6 w-6' />
+                                    </button>
+
+                                    {/* Large Screenshot Container */}
+                                    <motion.div
+                                        key={currentSlide}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.3 }}
+                                        className='relative h-full max-h-[calc(100vh-140px)] flex-1 overflow-hidden rounded-lg'>
+                                        <Image
+                                            src={slides[currentSlide].src}
+                                            alt={slides[currentSlide].alt}
+                                            fill
+                                            className='object-contain'
+                                            unoptimized
+                                        />
+                                    </motion.div>
+
+                                    {/* Next Button */}
+                                    <button
+                                        onClick={nextSlide}
+                                        className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-600/80 text-white backdrop-blur-sm transition-all hover:bg-green-700'>
+                                        <ChevronRight className='h-6 w-6' />
+                                    </button>
+                                </div>
+
+                                {/* Description Panel - Right Side */}
+                                <motion.div
+                                    key={`desc-${currentSlide}`}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.4, delay: 0.1 }}
+                                    className='flex w-80 flex-col justify-center rounded-lg border border-gray-600 bg-gradient-to-r from-gray-900/80 to-gray-800/80 p-6 backdrop-blur-sm'>
+                                    <div className='mb-4 flex items-center space-x-2'>
                                         <div className='h-2 w-2 rounded-full bg-blue-400'></div>
                                         <span className='text-sm font-medium text-blue-400'>Process Description</span>
                                     </div>
                                     <p className='text-lg leading-relaxed text-gray-200'>
                                         {slides[currentSlide].description}
                                     </p>
-                                </div>
-                            </motion.div>
-
-                            {/* Screenshot with Side Navigation - Flexbox Layout */}
-                            <div className='flex flex-1 items-center justify-between gap-4 px-4'>
-                                {/* Previous Button - Left Side */}
-                                <button
-                                    onClick={prevSlide}
-                                    disabled={currentSlide === 0}
-                                    className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-600/80 text-white backdrop-blur-sm transition-all hover:bg-blue-700 disabled:bg-gray-600/50 disabled:opacity-50'>
-                                    <ChevronLeft className='h-6 w-6' />
-                                </button>
-
-                                {/* Wide Screenshot Container */}
-                                <motion.div
-                                    key={currentSlide}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                    className='relative h-full max-h-[calc(100vh-80px)] flex-1 overflow-hidden'>
-                                    <Image
-                                        src={slides[currentSlide].src}
-                                        alt={slides[currentSlide].alt}
-                                        fill
-                                        className='object-contain'
-                                        unoptimized
-                                    />
                                 </motion.div>
-
-                                {/* Next Button - Right Side */}
-                                <button
-                                    onClick={nextSlide}
-                                    className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-600/80 text-white backdrop-blur-sm transition-all hover:bg-green-700'>
-                                    <ChevronRight className='h-6 w-6' />
-                                </button>
                             </div>
                         </div>
                     </div>
