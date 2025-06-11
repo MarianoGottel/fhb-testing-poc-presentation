@@ -4,11 +4,13 @@ import { useState } from 'react';
 
 import { SlideContainer } from '../../slide-container';
 import { UserJourneyE2ESlideshow } from './user-journey-e2e-slideshow';
+import { UserStoryComponentSlideshow } from './user-story-component-slideshow';
 import { motion } from 'framer-motion';
 import { Clock, Layers, TestTube2 } from 'lucide-react';
 
 export function DemoShowcaseSlide() {
     const [isE2ESlideshowOpen, setIsE2ESlideshowOpen] = useState(false);
+    const [isComponentSlideshowOpen, setIsComponentSlideshowOpen] = useState(false);
 
     const demoResults = [
         {
@@ -171,14 +173,19 @@ export function DemoShowcaseSlide() {
                             </div>
                         </motion.div>
 
-                        {/* Workflow 2: User Story → Component + Tests */}
+                        {/* Workflow 2: User Story → Component + Tests - CLICKABLE */}
                         <motion.div
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 1.0, duration: 0.8 }}
-                            className='rounded-xl border border-[#4ECDC4]/30 bg-gradient-to-r from-[#4ECDC4]/10 to-[#4ECDC4]/5 p-5'>
+                            onClick={() => {
+                                console.log('Workflow 2 clicked! Opening Component slideshow...');
+                                setIsComponentSlideshowOpen(true);
+                            }}
+                            className='cursor-pointer rounded-xl border border-[#4ECDC4]/30 bg-gradient-to-r from-[#4ECDC4]/10 to-[#4ECDC4]/5 p-5 transition-all hover:scale-105 hover:border-[#4ECDC4]/70 hover:bg-gradient-to-r hover:from-[#4ECDC4]/20 hover:to-[#4ECDC4]/15'>
                             <h3 className='mb-3 text-center text-lg font-bold text-[#4ECDC4]'>
                                 Workflow 2: User Story → Component + Tests
+                                <span className='ml-2 animate-pulse text-sm text-yellow-400'>🖱️ Click to view</span>
                             </h3>
 
                             {/* Component Workflow steps */}
@@ -258,6 +265,12 @@ export function DemoShowcaseSlide() {
 
             {/* User Journey E2E Slideshow */}
             <UserJourneyE2ESlideshow isOpen={isE2ESlideshowOpen} onClose={() => setIsE2ESlideshowOpen(false)} />
+
+            {/* User Story Component Slideshow */}
+            <UserStoryComponentSlideshow
+                isOpen={isComponentSlideshowOpen}
+                onClose={() => setIsComponentSlideshowOpen(false)}
+            />
         </>
     );
 }

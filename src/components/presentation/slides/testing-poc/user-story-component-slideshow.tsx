@@ -6,39 +6,46 @@ import Image from 'next/image';
 
 import { usePresentationStore } from '@/lib/presentation/store';
 
-import { SlideContainer } from '../../slide-container';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-interface UserJourneyE2ESlideshowProps {
+interface UserStoryComponentSlideshowProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
 const slides = [
     {
-        src: '/images/getUserJourney.png',
-        alt: 'Get User Journey - AI analyzes application workflow',
-        title: 'Step 1: Get User Journey',
-        description: 'The agent retrieves the current user journey and understands the flow.'
+        src: '/images/step1CreateTestCases.png',
+        alt: 'Create Test Cases - AI analyzes user story and generates test cases',
+        title: 'Step 1: Create Test Cases',
+        description:
+            'The agent analyzes and validates the user story (fetched from Jira). Based on acceptance criteria, it generates comprehensive test cases. Uses jira_get_issues and create_test_cases tools.'
     },
     {
-        src: '/images/navigationPOM.png',
-        alt: 'Navigation POM - Page Object Models generation',
-        title: 'Step 2: Navigation POM Generation',
+        src: '/images/step2GenerateComponent.png',
+        alt: 'Generate Component - AI creates React component from Figma design',
+        title: 'Step 2: Generate Component',
         description:
-            'The agent opens the browser and navigates through the screen, filling forms and clicking buttons. Based on these information, the agent creates a Page Model which is used as the base for the test.'
+            'The agent generates a React component based on Figma design and user story requirements. Uses create_screen tool.'
     },
     {
-        src: '/images/e2eTest.png',
-        alt: 'E2E Test - Complete test suite execution',
-        title: 'Step 3: E2E Test Execution',
+        src: '/images/step3GenerateStories.png',
+        alt: 'Generate Stories - AI creates Storybook stories for component',
+        title: 'Step 3: Generate Stories',
         description:
-            'The agent executes the e2e test iteratively through the process. Every time a new page model is created, the e2e test is updated and validated.'
+            'The agent creates Storybook stories based on the test cases and component structure. Uses generate_storybook_testing_stories tool'
+    },
+    {
+        src: '/images/step4DebugStories.png',
+        alt: 'Debug Stories - AI iteratively fixes and validates Storybook tests',
+        title: 'Step 4: Debug Stories',
+        description:
+            'The agent iteratively debugs and validates the Storybook stories to ensure they work correctly. Uses browser_actions toolset.'
     }
 ];
 
-export function UserJourneyE2ESlideshow({ isOpen, onClose }: UserJourneyE2ESlideshowProps) {
+export function UserStoryComponentSlideshow({ isOpen, onClose }: UserStoryComponentSlideshowProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const { setProcessSlideshowOpen } = usePresentationStore();
 
@@ -151,8 +158,8 @@ export function UserJourneyE2ESlideshow({ isOpen, onClose }: UserJourneyE2ESlide
                                 className='mx-auto mb-4 max-w-4xl rounded-lg border border-gray-600 bg-gradient-to-r from-gray-900/80 to-gray-800/80 p-6 backdrop-blur-sm'>
                                 <div className='text-center'>
                                     <div className='mb-3 flex items-center justify-center space-x-2'>
-                                        <div className='h-2 w-2 rounded-full bg-blue-400'></div>
-                                        <span className='text-sm font-medium text-blue-400'>Process Description</span>
+                                        <div className='h-2 w-2 rounded-full bg-[#4ECDC4]'></div>
+                                        <span className='text-sm font-medium text-[#4ECDC4]'>Process Description</span>
                                     </div>
                                     <p className='text-lg leading-relaxed text-gray-200'>
                                         {slides[currentSlide].description}
