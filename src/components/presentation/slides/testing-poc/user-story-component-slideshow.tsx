@@ -34,7 +34,7 @@ const slides = [
         alt: 'Generate Stories - AI creates Storybook stories for component',
         title: 'Step 3: Generate Stories',
         description:
-            'The agent creates Storybook test scripts based on the test cases and component structure. The scripts focuses focus on failure cases and low level UI interactions.'
+            'The agent creates Storybook test scripts based on the test cases and component structure. The scripts focus on failure cases and low level UI interactions.'
     },
     {
         src: '/images/step4DebugStories.png',
